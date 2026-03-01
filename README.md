@@ -1,3 +1,7 @@
+**Model Version**: v1.0 (Synchronized with Paper v9.2 Appendix A)
+**Last Updated**: 2026-02-28
+**CV Status**: https://stats.stackexchange.com/questions/674997/[...]
+
 ## External Review
 
 This model is currently under community review at Cross Validated:
