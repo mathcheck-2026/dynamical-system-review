@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+uht_v12_results.json
+*.png
+.ipynb_checkpoints/
