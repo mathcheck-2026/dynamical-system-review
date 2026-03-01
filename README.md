@@ -1,11 +1,11 @@
-# dynamical-system-review
-Mathematical review of coupled SDE system with saturation functions
-# Coupled Nonlinear SDE System - Mathematical Review
+## External Review
 
-## System Description
+This model is currently under community review at Cross Validated:
+- **Question ID**: 674997
+- **Title**: Identifiability and Stability of Coupled Nonlinear SDE System with Saturation Functions
+- **Status**: Active review of 5 key mathematical challenges
 
-Four-dimensional coupled stochastic differential equation system with saturation functions:
-
+### Mathematical Specification (Anonymous Version)
 $$
 \begin{cases}
 \frac{dx_1}{dt} = -a x_1 + b \frac{x_2}{1+x_2} + c \frac{1}{1+d x_4} + \xi_1(t) \\
@@ -15,36 +15,28 @@ $$
 \end{cases}
 $$
 
-## Constraints
+**State Variable Constraints:**
+- $x_1, x_3 \in [0,1]$ (bounded state variables, saturation effects)
+- $x_2 \in [0, \infty)$ (accumulating variable, e.g., cumulative resource investment)
+- $x_4 \in [0,1]$ (normalized saturation variable)
+- $\xi(t) \sim \mathcal{N}(0, \sigma^2)$ with $\sigma \in [0, 0.1]$ (Gaussian white noise)
 
-- $x_1, x_3 \in [0,1]$ (bounded)
-- $x_2 \in [0, \infty)$ (accumulating)
-- $x_4 \in [0,1]$ (normalized)
-- $\xi(t) \sim \mathcal{N}(0, \sigma^2)$, $\sigma \in [0, 0.1]$
+**Parameter Boundaries (all positive real numbers):**
+- Decay rates: $a, f, m \in [0.1, 0.5]$
+- Coupling strengths: $b, e, h, k \in [0.2, 1.0]$
+- Cross-coupling: $c, n \in [0.1, 0.8]$
+- Nonlinear modulation: $d, g \in [0.5, 2.0]$
+- Inhibition coefficients: $i, j \in [0.1, 1.0]$
 
-## Parameters
+### Parameter Constraints
+**Note on Parameter $f$**: While initial exploration suggested $f \in [0.1, 0.5]$, 
+theoretical constraints require $f \in [0.05, 0.3]$ to represent slower accumulation dynamics 
+(see CV question for biological justification).
 
-| Parameter | Range | Description |
-|-----------|-------|-------------|
-| $a, f, m$ | [0.1, 0.5] | Decay rates |
-| $b, e, h, k$ | [0.2, 1.0] | Coupling strengths |
-| $c, n$ | [0.1, 0.8] | Cross-coupling |
-| $d, g$ | [0.5, 2.0] | Nonlinear modulation |
-| $i, j$ | [0.1, 1.0] | Inhibition |
-
-## Key Questions
-
-1. **Identifiability**: Are all 12 parameters identifiable? Potential collinearity between $f$ and $g$?
-2. **Stability**: Fixed points, limit cycles, or finite-time blow-up for $x_2$?
-3. **Reduction**: Can $x_3$ be eliminated via algebraic substitution without losing bifurcation behavior?
-4. **Bifurcation**: Saddle-node bifurcation as $x_4$ increases?
-5. **Noise**: Robustness of attractors at $\sigma = 0.1$?
-
-## External Review
-
-- **StackExchange**: [Cross Validated Post](https://stats.stackexchange.com/questions/674997/)
-- **Status**: Awaiting community feedback
-
-## License
-
-MIT License - Open for academic review and validation
+### Context
+This system models accumulation-saturation tradeoffs in biological/organizational systems 
+with four coupled processes:
+1. $x_1$: Bounded commitment/attention (decay rate $a$)
+2. $x_2$: Cumulative investment (unbounded accumulation, saturation $x_2/(1+x_2)$)
+3. $x_3$: Intermediate arbitration (algebraically reducible to 3D)
+4. $x_4$: Saturation/locking mechanism (drives bifurcation)
