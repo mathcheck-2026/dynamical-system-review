@@ -1,46 +1,86 @@
-**Model Version**: v1.0 (Synchronized with Paper v9.2 Appendix A)
-**Last Updated**: 2026-02-28
-**CV Status**: https://stats.stackexchange.com/questions/674997/[...]
+# Dynamical System Review: Quadra-Filter Model v1.1
 
-## External Review
+**Status**: Active Review | **Model Version**: v1.1 | **Last Updated**: 2026-03-01
 
-This model is currently under community review at Cross Validated:
-- **Question ID**: 674997
-- **Title**: Identifiability and Stability of Coupled Nonlinear SDE System with Saturation Functions
-- **Status**: Active review of 5 key mathematical challenges
+External mathematical audit for Cognitive Capital Life Cycle (CCLC) theory.
 
-### Mathematical Specification (Anonymous Version)
-$$
-\begin{cases}
-\frac{dx_1}{dt} = -a x_1 + b \frac{x_2}{1+x_2} + c \frac{1}{1+d x_4} + \xi_1(t) \\
-\frac{dx_2}{dt} = e x_1 - f x_2(1 + g x_4) + \xi_2(t) \\
-\frac{dx_3}{dt} = h \frac{x_2}{1+x_2} - i x_4 - j x_3 + \xi_3(t) \\
-\frac{dx_4}{dt} = k \max(x_3,0) - m x_4 + n x_1 + \xi_4(t)
-\end{cases}
-$$
+## Model Specification
 
-**State Variable Constraints:**
-- $x_1, x_3 \in [0,1]$ (bounded state variables, saturation effects)
-- $x_2 \in [0, \infty)$ (accumulating variable, e.g., cumulative resource investment)
-- $x_4 \in [0,1]$ (normalized saturation variable)
-- $\xi(t) \sim \mathcal{N}(0, \sigma^2)$ with $\sigma \in [0, 0.1]$ (Gaussian white noise)
+4D Coupled SDE System:
+dx1/dt = -α·x1 + β·(x2/(1+x2)) + γ/(1+δ·x4)
+dx2/dt = ε·x1 - ζ·x2·(1+η·x4)
+dx3/dt = θ·(x2/(1+x2)) - ι·x4 - κ·x3
+dx4/dt = λ·max(x3,0) - μ·x4 + ν·x1
 
-**Parameter Boundaries (all positive real numbers):**
-- Decay rates: $a, f, m \in [0.1, 0.5]$
-- Coupling strengths: $b, e, h, k \in [0.2, 1.0]$
-- Cross-coupling: $c, n \in [0.1, 0.8]$
-- Nonlinear modulation: $d, g \in [0.5, 2.0]$
-- Inhibition coefficients: $i, j \in [0.1, 1.0]$
+**Critical Update v1.1**: Added Q6 (Adversarial Testing) to distinguish true bifurcation from parameter freezing.
 
-### Parameter Constraints
-**Note on Parameter $f$**: While initial exploration suggested $f \in [0.1, 0.5]$, 
-theoretical constraints require $f \in [0.05, 0.3]$ to represent slower accumulation dynamics 
-(see CV question for biological justification).
+## UHT-v1.2 Protocol
 
-### Context
-This system models accumulation-saturation tradeoffs in biological/organizational systems 
-with four coupled processes:
-1. $x_1$: Bounded commitment/attention (decay rate $a$)
-2. $x_2$: Cumulative investment (unbounded accumulation, saturation $x_2/(1+x_2)$)
-3. $x_3$: Intermediate arbitration (algebraically reducible to 3D)
-4. $x_4$: Saturation/locking mechanism (drives bifurcation)
+Unified Hysteresis Testing Protocol validates:
+- **Test A**: Adversarial activation (low inhibition i=0.2)
+- **Test C**: Hysteresis width measurement (expect ΔL ∈ [0.15, 0.25])
+- **Test D**: Parameter sensitivity (±10% perturbation)
+
+### Quick Start
+```bash
+pip install numpy scipy
+python uht_protocol_v12.py
+
+Review Questions (Open)
+Identifiability: Are ζ and η structurally identifiable?
+Stability: Does x2 remain bounded given ζ ∈ [0.05, 0.3]?
+Model Reduction: Is 3D reduction (eliminating x3) valid?
+Bifurcation Type: Saddle-node vs. transcritical?
+Noise Robustness: Stability under σ=0.1?
+Adversarial: Is bifurcation robust to low inhibition (ι=0.2)?
+Links
+StackExchange: Question 674997
+Paper: CCLC Theory v10.1 (BBS Target Article)
+Contact: See paper Author Note for theoretical questions; GitHub Issues for mathematical technicalities
+
+Symbol Map
+| Paper  | Code      | Description               |
+| ------ | --------- | ------------------------- |
+| C      | x1        | Perception-Capitalization |
+| M      | x2        | Memory-Consolidation      |
+| D      | x3        | Decision-Arbitration      |
+| L      | x4        | Life History-Saturation   |
+| η\_eff | (derived) | Effective plasticity      |
+
+Changelog
+v1.1 (2026-03-01): Added Q6, UHT-v1.2, parameter constraints updated
+v1.0 (2026-02-28): Initial model release
+License: MIT
+
+
+---
+
+### **文件③：`CHANGELOG.md`**
+
+```markdown
+# Changelog
+
+## [v1.1] - 2026-03-01
+
+### Added
+- UHT-v1.2 protocol implementation (Python)
+- Q6: Adversarial Parameter Testing to detect parameter freezing
+- Hysteresis measurement with adaptive dwell time
+- Parameter sensitivity analysis (Test D)
+- Symbol correspondence table (Paper ↔ Code)
+
+### Changed
+- ζ (consolidation rate) constrained to [0.05, 0.3] (was [0.1, 0.5])
+- Clarified Layer 3 as potentially functionally emergent
+
+### Fixed
+- Added missing Q5 (Noise Sensitivity) documentation
+- Corrected parameter name conflicts (lambda → lambda_param)
+
+## [v1.0] - 2026-02-28
+
+### Added
+- Initial 4D SDE specification
+- Parameters with biological constraints
+- Q1-Q5 review questions
+- GitHub Issue #1 for community audit
