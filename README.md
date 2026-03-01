@@ -26,19 +26,19 @@ Unified Hysteresis Testing Protocol validates:
 pip install numpy scipy
 python uht_protocol_v12.py
 
-Review Questions (Open)
+###**Review Questions (Open)**
 Identifiability: Are ζ and η structurally identifiable?
 Stability: Does x2 remain bounded given ζ ∈ [0.05, 0.3]?
 Model Reduction: Is 3D reduction (eliminating x3) valid?
 Bifurcation Type: Saddle-node vs. transcritical?
 Noise Robustness: Stability under σ=0.1?
 Adversarial: Is bifurcation robust to low inhibition (ι=0.2)?
-Links
+###**inks**
 StackExchange: Question 674997
 Paper: CCLC Theory v10.1 (BBS Target Article)
 Contact: See paper Author Note for theoretical questions; GitHub Issues for mathematical technicalities
 
-Symbol Map
+###**Symbol Map**
 | Paper  | Code      | Description               |
 | ------ | --------- | ------------------------- |
 | C      | x1        | Perception-Capitalization |
